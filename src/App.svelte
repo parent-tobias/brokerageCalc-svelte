@@ -126,6 +126,9 @@ const currency = toPrecision(2);
         name: "Madhya Pradesh",
         value: "Madhya Pradesh"
       },{
+        name: "Maharashtra",
+        value: "Maharashtra"
+      },{
         name: "Meghalaya",
         value: "Meghalaya"
       },{
