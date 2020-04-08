@@ -185,7 +185,7 @@ const currency = toPrecision(2);
 
 <article>
   <section>
-    <Tabs bind:activeTabValue={currentTab} items={tabItems} />
+    <Tabs bind:activeTabValue={currentTab} items={activity ? tabItems : [tabItems[0] ] } />
   </section>
   {#if 1 === currentTab}
     <section class="content-pane">
@@ -202,13 +202,13 @@ const currency = toPrecision(2);
       </div>
     </section>
   {/if}
-  {#if 2 === currentTab}
+  {#if 2 === currentTab && activity}
     <ReportTable settings={reportPanes[0]} data={activity.instruments} />
   {/if}
-  {#if 3 === currentTab}
+  {#if 3 === currentTab && activity}
     <ReportTable settings={reportPanes[1]} data={activity.positions} />
   {/if}
-  {#if 4 === currentTab}
+  {#if 4 === currentTab && activity}
     <ReportTable settings={reportPanes[2]} data={ includeCancelled ? activity.orders : activity.trades} />
   {/if}
 </article>
