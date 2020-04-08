@@ -8,6 +8,13 @@ const absoluteSum = prop => (total, obj) => Number(total) + Number(obj[prop]);
 const toPrecision = precision => num => Math.round(num*(Math.pow(10, precision)))/Math.pow(10, precision);
 const currency = toPrecision(2);
 
+// Sort array of objects by prop
+const sortBy = (prop) => (a, b) =>{
+  return typeof a[prop] === 'string'
+     ? a[prop].localeCompare(b[prop])
+     : a[prop] - b[prop]
+}
+
   let tabItems = [
     {label: "Overview", value: 1},
     {label: "By Instrument", value: 2},
@@ -182,7 +189,12 @@ const currency = toPrecision(2);
     activity = new Activity(orders);
   }
 </script>
-
+<header>
+  <figure>
+    <img alt="BrokerageCalc Logo" src="./img/logo.png" />
+    <figcaption>BrokerageCalc</figcaption>
+  </figure>
+</header>
 <article>
   <section>
     <Tabs bind:activeTabValue={currentTab} items={activity ? tabItems : [tabItems[0] ] } />
@@ -203,7 +215,7 @@ const currency = toPrecision(2);
     </section>
   {/if}
   {#if 2 === currentTab && activity}
-    <ReportTable settings={reportPanes[0]} data={activity.instruments} />
+    <ReportTable settings={reportPanes[0]} data={activity.instruments.sort(sortBy("instrument"))} />
   {/if}
   {#if 3 === currentTab && activity}
     <ReportTable settings={reportPanes[1]} data={activity.positions} />
@@ -215,19 +227,15 @@ const currency = toPrecision(2);
 
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+  :global(*){
+    font-family: "Muli", sans-serif;
+  }
+  header img {
+    width: 60vw;
+  }
+	figcaption {
+    display: none;
+  }
 
 	@media (min-width: 640px) {
 		main {
