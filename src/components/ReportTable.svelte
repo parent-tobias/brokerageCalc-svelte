@@ -17,7 +17,7 @@
         {#each data as record, index}
           <tr>
           {#each settings.columns as column, index}
-            <td>{ column.func ? column.func(record) : record[column.field]}</td>
+            <td>{ @html column.func ? column.func(record) : record[column.field]}</td>
           {/each}
         {/each}
         </tbody>

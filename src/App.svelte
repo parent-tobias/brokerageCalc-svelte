@@ -4,6 +4,9 @@
   import FileUploader from './components/FileUploader.svelte';
   import ReportTable from './components/ReportTable.svelte';
 
+const sumBy = prop => (total, order) => order.isSellOrder 
+   ? Number(total) + Number(order[prop]) 
+   : Number(total) - Number(order[prop]);
 const absoluteSum = prop => (total, obj) => Number(total) + Number(obj[prop]);
 const toPrecision = precision => num => Math.round(num*(Math.pow(10, precision)))/Math.pow(10, precision);
 const currency = toPrecision(2);
@@ -68,10 +71,10 @@ const sortBy = (prop) => (a, b) =>{
       { title: "Type", field: "type"},
       { title: "Status", field: "status"},
       { title: "Avg Price", field: "averagePrice"},
-      { title: "Quantity", field: "quantity", func: (trade) => trade.quantity},
-      { title: "Gross", field: "gross", func: (trade) => currency(trade.gross) },
+      { title: "Quantity", field: "quantity", func: (trade) => trade.isSellOrder ? trade.quantity : `<span class='buy'>${trade.quantity}</span>`},
+      { title: "Gross", field: "gross", func: (trade) => trade.isSellOrder ? currency(trade.gross) : `<span class='buy'>${currency(trade.gross)}</span>` },
       { title: "Total Fees", field: "totalFees", func: (trade)=> currency(trade.totalFees)},
-      { title: "Net", field: "net", func: (trade) => currency(trade.net) },
+      { title: "Net", field: "net", func: (trade) => trade.isSellOrder ? currency(trade.net) : `<span class='buy'>${currency(trade.net)}</span>` },
     ],
     summaryRow: [
       { title: "** Totals **"},
@@ -79,10 +82,10 @@ const sortBy = (prop) => (a, b) =>{
       { title: ""},
       { title: ""},
       { title: ""},
-      { title: "quantity", func: (data) => currency( data.reduce(absoluteSum("quantity"), 0) ) },
-      { title: "gross", func: (data) => currency( data.reduce(absoluteSum("gross"), 0 ) ) },
+      { title: "quantity", func: (data) => currency( data.reduce(sumBy("quantity"), 0) ) },
+      { title: "gross", func: (data) => currency( data.reduce(sumBy("gross"), 0 ) ) },
       { title: "totalFees", func: (data) => currency( data.reduce(absoluteSum("totalFees"), 0 ) ) },
-      { title: "net", func: (data) => currency( data.reduce(absoluteSum("net"), 0) ) },
+      { title: "net", func: (data) => currency( data.reduce(sumBy("net"), 0) ) },
     ]
   }
   ];
@@ -248,6 +251,15 @@ const sortBy = (prop) => (a, b) =>{
   footer {
     font-size: .75em;
     text-align: center;
+  }
+  :global(.buy) {
+    color: red;
+  }
+  :global(.buy::before) {
+    content: "(";
+  }
+  :global(.buy::after) {
+    content: ")";
   }
 
 	@media (min-width: 640px) {
