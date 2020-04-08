@@ -189,52 +189,65 @@ const sortBy = (prop) => (a, b) =>{
     activity = new Activity(orders);
   }
 </script>
-<header>
-  <figure>
-    <img alt="BrokerageCalc Logo" src="./img/logo.png" />
-    <figcaption>BrokerageCalc</figcaption>
-  </figure>
-</header>
-<article>
-  <section>
-    <Tabs bind:activeTabValue={currentTab} items={activity ? tabItems : [tabItems[0] ] } />
-  </section>
-  {#if 1 === currentTab}
-    <section class="content-pane">
-      <h3>Overview Content</h3>
-      <div>
-        <FileUploader on:upload={handleFileUpload} />
-          <StickySelector bind:selected={selectedState} settings={selectSettings} />
-          <label>Include non-complete orders in transaction view: <input type="checkbox" bind:checked={includeCancelled} ></label>
-        {#if activity}
-          <span>Orders: {activity.orders.length} </span>
-          <span>Trades: {activity.trades.length} </span>
-          <span>Positions: {activity.positions.length} </span>
-        {/if}
-      </div>
-    </section>
-  {/if}
-  {#if 2 === currentTab && activity}
-    <ReportTable settings={reportPanes[0]} data={activity.instruments.sort(sortBy("instrument"))} />
-  {/if}
-  {#if 3 === currentTab && activity}
-    <ReportTable settings={reportPanes[1]} data={activity.positions} />
-  {/if}
-  {#if 4 === currentTab && activity}
-    <ReportTable settings={reportPanes[2]} data={ includeCancelled ? activity.orders : activity.trades} />
-  {/if}
-</article>
 
+<main>
+  <header>
+    <figure>
+      <img alt="BrokerageCalc Logo" src="./img/logo.png" />
+      <figcaption>BrokerageCalc</figcaption>
+    </figure>
+  </header>
+  <article>
+    <section>
+      <Tabs bind:activeTabValue={currentTab} items={activity ? tabItems : [tabItems[0] ] } />
+    </section>
+    {#if 1 === currentTab}
+      <section class="content-pane">
+        <h3>Overview Content</h3>
+        <div>
+          <FileUploader on:upload={handleFileUpload} />
+            <StickySelector bind:selected={selectedState} settings={selectSettings} />
+            <label>Include non-complete orders in transaction view: <input type="checkbox" bind:checked={includeCancelled} ></label>
+          {#if activity}
+            <span>Orders: {activity.orders.length} </span>
+            <span>Trades: {activity.trades.length} </span>
+            <span>Positions: {activity.positions.length} </span>
+          {/if}
+        </div>
+      </section>
+    {/if}
+    {#if 2 === currentTab && activity}
+      <ReportTable settings={reportPanes[0]} data={activity.instruments.sort(sortBy("instrument"))} />
+    {/if}
+    {#if 3 === currentTab && activity}
+      <ReportTable settings={reportPanes[1]} data={activity.positions} />
+    {/if}
+    {#if 4 === currentTab && activity}
+      <ReportTable settings={reportPanes[2]} data={ includeCancelled ? activity.orders : activity.trades} />
+    {/if}
+  </article>
+  <footer>
+    Design and concepts: <a href="https://github.com/rajataudichya" target="_blank">Rajat Audichya</a> | Development and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a>
+  </footer>
+</main>
 
 <style>
   :global(*){
     font-family: "Muli", sans-serif;
+  }
+  main {
+    width: 90vw;
+    margin: 0 auto;
   }
   header img {
     width: 60vw;
   }
 	figcaption {
     display: none;
+  }
+  footer {
+    font-size: .75em;
+    text-align: center;
   }
 
 	@media (min-width: 640px) {
