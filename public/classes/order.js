@@ -23,7 +23,7 @@ export default class Order {
     this.stateChoice = stateChoice;
   }
   get quantity(){
-    return this.state.qty;
+    return !this.isSellOrder ? this.state.qty : this.state.qty*-1;
   }
   get averagePrice(){
     return this.state.avgPrice;
@@ -32,13 +32,13 @@ export default class Order {
     return this.state.instrument;
   }
   get gross(){
-    return this.isSellOrder ? Number(this.quantity)*Number(this.averagePrice) : Number(this.quantity)*Number(this.averagePrice)*-1;
+    return Number(this.quantity)*Number(this.averagePrice)*-1;
   }
   get brokerage(){
-    return Math.abs(this.gross*.0001 > 20 ? 20 : this.gross*.0001);
+    return Math.abs(this.gross*.0003 > 20 ? 20 : this.gross*.0003);
   }
   get STT(){
-    return (this.isSellOrder&&this.isComplete) ? this.gross*.00025 : 0 ;
+    return (this.isSellOrder&&this.isComplete) ? Math.abs(this.gross*.00025) : 0 ;
   }
   get transactionFee(){
     // At this point, there's a question of NSE or BSE.
