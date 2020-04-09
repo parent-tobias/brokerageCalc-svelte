@@ -32,7 +32,7 @@ export default class Order {
     return this.state.instrument;
   }
   get gross(){
-    return Number(this.quantity)*Number(this.averagePrice);
+    return this.isSellOrder ? Number(this.quantity)*Number(this.averagePrice) : Number(this.quantity)*Number(this.averagePrice)*-1;
   }
   get brokerage(){
     return this.gross*.0001 > 20 ? 20 : this.gross*.0001;

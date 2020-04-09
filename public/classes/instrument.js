@@ -1,4 +1,4 @@
-import {currency, sumBy, absoluteSum} from "../utilities/number.js";
+import {currency, sumBy} from "../utilities/number.js";
 import {sortBy, filterBy } from "../utilities/array.js";
 import Position from "./position.js";
 
@@ -51,33 +51,33 @@ export default class Instrument {
     return this.orders.find(order => order.time == dateStamp);
   }
   get traded(){
-    return this.positions.reduce(absoluteSum("traded"), 0);
+    return this.positions.reduce(sumBy("traded"), 0);
   }
   get gross(){
-    return currency( this.positions.reduce(absoluteSum("gross"), 0) );
+    return currency( this.positions.reduce(sumBy("gross"), 0) );
   }
   get brokerage(){
-    return currency( this.positions.reduce(absoluteSum("brokerage"), 0) );
+    return currency( this.positions.reduce(sumBy("brokerage"), 0) );
   }
   get STT(){
-    return currency( this.positions.reduce(absoluteSum("STT"), 0) );
+    return currency( this.positions.reduce(sumBy("STT"), 0) );
   }
   get transactionFee(){
-    return currency ( this.positions.reduce(absoluteSum("transactionFee"), 0) );
+    return currency ( this.positions.reduce(sumBy("transactionFee"), 0) );
   }
   get GST(){
-    return currency( this.positions.reduce(absoluteSum("GST"), 0) )
+    return currency( this.positions.reduce(sumBy("GST"), 0) )
   }
   get SEBI(){
-    return currency( this.positions.reduce(absoluteSum("SEBI"), 0) )
+    return currency( this.positions.reduce(sumBy("SEBI"), 0) )
   }
   get stampCharge(){
-    return currency( this.positions.reduce(absoluteSum("stampCharge"), 0) )
+    return currency( this.positions.reduce(sumBy("stampCharge"), 0) )
   }
   get totalFees(){
-    return currency( this.positions.reduce(absoluteSum("totalFees"), 0) )
+    return currency( this.positions.reduce(sumBy("totalFees"), 0) )
   }
   get net(){
-    return currency( this.positions.reduce(absoluteSum("net"), 0) );
+    return currency( this.positions.reduce(sumBy("net"), 0) );
   }  
 }

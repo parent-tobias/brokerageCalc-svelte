@@ -1,10 +1,23 @@
 <script>
+import { createEventDispatcher } from 'svelte';
+
+const dispatch = createEventDispatcher();
+
+const downloadEvent = (e) => {
+  dispatch('download', {
+    type: e.target.value
+  })
+}
+
   export let settings={title:"", columns:[]};
   export let data="";
 </script>
 
     <section>
+    <header>
       <h3>{settings.title}</h3>
+      <button value={settings.type} on:click={downloadEvent}>Download this as .csv</button>
+    </header>
       <table>
         <thead>
           <tr>

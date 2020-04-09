@@ -4,10 +4,8 @@
   import FileUploader from './components/FileUploader.svelte';
   import ReportTable from './components/ReportTable.svelte';
 
-const sumBy = prop => (total, order) => order.isSellOrder 
-   ? Number(total) + Number(order[prop]) 
-   : Number(total) - Number(order[prop]);
-const absoluteSum = prop => (total, obj) => Number(total) + Number(obj[prop]);
+
+const sumBy = prop => (total, obj) => Number(total) + Number(obj[prop]);
 const toPrecision = precision => num => Math.round(num*(Math.pow(10, precision)))/Math.pow(10, precision);
 const currency = toPrecision(2);
 
@@ -26,6 +24,7 @@ const sortBy = (prop) => (a, b) =>{
   ];
   let reportPanes = [{
     title: "Activity by Instrument",
+    type: "allInstruments",
     columns: [
       { title: "Instrument", field: "instrument"},
       { title: "# Traded", field: "traded"},
@@ -35,13 +34,14 @@ const sortBy = (prop) => (a, b) =>{
     ],
     summaryRow: [
       { title: "** Totals **"},
-      { title: "traded", func: (data) => currency( data.reduce(absoluteSum("traded"), 0) ) },
-      { title: "gross", func: (data) => currency( data.reduce(absoluteSum("gross"), 0 ) ) },
-      { title: "totalFees", func: (data) => currency( data.reduce(absoluteSum("totalFees"), 0 ) ) },
-      { title: "net", func: (data) => currency( data.reduce(absoluteSum("net"), 0) ) },
+      { title: "traded", func: (data) => currency( data.reduce(sumBy("traded"), 0) ) },
+      { title: "gross", func: (data) => currency( data.reduce(sumBy("gross"), 0 ) ) },
+      { title: "totalFees", func: (data) => currency( data.reduce(sumBy("totalFees"), 0 ) ) },
+      { title: "net", func: (data) => currency( data.reduce(sumBy("net"), 0) ) },
     ]
   },{
     title: "Activity by Position",
+    type: "allPositions",
     columns: [
       { title: "Instrument", field: "instrument"},
       { title: "# Traded", field: "traded"},
@@ -54,17 +54,18 @@ const sortBy = (prop) => (a, b) =>{
     ],
     summaryRow: [
       { title: "** Totals **"},
-      { title: "traded", func: (data) => currency( data.reduce(absoluteSum("traded"), 0) ) },
-      { title: "gross", func: (data) => currency( data.reduce(absoluteSum("gross"), 0 ) ) },
-      { title: "totalFees", func: (data) => currency( data.reduce(absoluteSum("totalFees"), 0 ) ) },
-      { title: "net", func: (data) => currency( data.reduce(absoluteSum("net"), 0) ) },
+      { title: "traded", func: (data) => currency( data.reduce(sumBy("traded"), 0) ) },
+      { title: "gross", func: (data) => currency( data.reduce(sumBy("gross"), 0 ) ) },
+      { title: "totalFees", func: (data) => currency( data.reduce(sumBy("totalFees"), 0 ) ) },
+      { title: "net", func: (data) => currency( data.reduce(sumBy("net"), 0) ) },
       { title: ""},
       { title: ""},
       { title: "outstanding", func: (data) => data.filter(position => !position.isClosed).length }
     ]
   },{
     title: "Activity by Transaction",
-    columns: [
+     type: "allTrades",
+   columns: [
 // "instrument","time","type","status","averagePrice","quantity","gross","totalFees","net"
       { title: "Instrument", field: "instrument"},
       { title: "Time", field: "time", func: (trade)=>trade.time.split(" ")[1]},
@@ -84,7 +85,7 @@ const sortBy = (prop) => (a, b) =>{
       { title: ""},
       { title: "quantity", func: (data) => currency( data.reduce(sumBy("quantity"), 0) ) },
       { title: "gross", func: (data) => currency( data.reduce(sumBy("gross"), 0 ) ) },
-      { title: "totalFees", func: (data) => currency( data.reduce(absoluteSum("totalFees"), 0 ) ) },
+      { title: "totalFees", func: (data) => currency( data.reduce(sumBy("totalFees"), 0 ) ) },
       { title: "net", func: (data) => currency( data.reduce(sumBy("net"), 0) ) },
     ]
   }
@@ -187,9 +188,16 @@ const sortBy = (prop) => (a, b) =>{
 
   async function handleFileUpload(event){
     const {csvConverter, Activity} = brokerageCalc;
-    console.log(event.detail.file.name);
+    
     let orders =  await csvConverter.fromFile(event.detail.file)
     activity = new Activity(orders);
+  }
+
+  async function handleFileDownload(event){
+    const {reportGenerator} = brokerageCalc;
+
+    const dataset = event.detail.type;
+    await reportGenerator[dataset](activity);
   }
 </script>
 
@@ -220,13 +228,13 @@ const sortBy = (prop) => (a, b) =>{
       </section>
     {/if}
     {#if 2 === currentTab && activity}
-      <ReportTable settings={reportPanes[0]} data={activity.instruments.sort(sortBy("instrument"))} />
+      <ReportTable settings={reportPanes[0]} data={activity.instruments.sort(sortBy("instrument"))} on:download={handleFileDownload} />
     {/if}
     {#if 3 === currentTab && activity}
-      <ReportTable settings={reportPanes[1]} data={activity.positions} />
+      <ReportTable settings={reportPanes[1]} data={activity.positions} on:download={handleFileDownload} />
     {/if}
     {#if 4 === currentTab && activity}
-      <ReportTable settings={reportPanes[2]} data={ includeCancelled ? activity.orders : activity.trades} />
+      <ReportTable settings={reportPanes[2]} data={ includeCancelled ? activity.orders : activity.trades} on:download={handleFileDownload} />
     {/if}
   </article>
   <footer>

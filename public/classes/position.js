@@ -1,6 +1,6 @@
 import Order from './order.js';
 import {filterBy} from '../utilities/array.js';
-import {sumBy, absoluteSum, currency} from "../utilities/number.js";
+import {sumBy, currency} from "../utilities/number.js";
 /**********************
  * A Position is started by passing in a Trade, and Trders 
  *   can continue to be added to a position until it reaches
@@ -38,7 +38,7 @@ export default class Position {
     return this.trades.reduce(sumBy("quantity"), 0);
   }
   get traded(){
-    return this.trades.filter(filterBy("type")("SELL")).reduce(absoluteSum("quantity"), 0);
+    return this.trades.filter(filterBy("type")("SELL")).reduce(sumBy("quantity"), 0);
   }
   get opened(){
     return this.trades[0].time;
@@ -58,25 +58,25 @@ export default class Position {
     return currency( this.trades.reduce(sumBy("gross"), 0) );
   }
   get brokerage(){
-    return currency( this.trades.reduce(absoluteSum("brokerage"), 0) );
+    return currency( this.trades.reduce(sumBy("brokerage"), 0) );
   }
   get STT(){
-    return currency( this.trades.reduce(absoluteSum("STT"), 0) );
+    return currency( this.trades.reduce(sumBy("STT"), 0) );
   }
   get transactionFee(){
-    return currency ( this.trades.reduce(absoluteSum("transactionFee"), 0) );
+    return currency ( this.trades.reduce(sumBy("transactionFee"), 0) );
   }
   get GST(){
-    return currency( this.trades.reduce(absoluteSum("GST"), 0) )
+    return currency( this.trades.reduce(sumBy("GST"), 0) )
   }
   get SEBI(){
-    return currency( this.trades.reduce(absoluteSum("SEBI"), 0) )
+    return currency( this.trades.reduce(sumBy("SEBI"), 0) )
   }
   get stampCharge(){
-    return currency( this.trades.reduce(absoluteSum("stampCharge"), 0) )
+    return currency( this.trades.reduce(sumBy("stampCharge"), 0) )
   }
   get totalFees(){
-    return currency( this.trades.reduce(absoluteSum("totalFees"), 0) )
+    return currency( this.trades.reduce(sumBy("totalFees"), 0) )
   }
   get net(){
     return currency( this.trades.reduce(sumBy("net"), 0) );
