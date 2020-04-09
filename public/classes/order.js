@@ -35,7 +35,7 @@ export default class Order {
     return this.isSellOrder ? Number(this.quantity)*Number(this.averagePrice) : Number(this.quantity)*Number(this.averagePrice)*-1;
   }
   get brokerage(){
-    return this.gross*.0001 > 20 ? 20 : this.gross*.0001;
+    return Math.abs(this.gross*.0001 > 20 ? 20 : this.gross*.0001);
   }
   get STT(){
     return (this.isSellOrder&&this.isComplete) ? this.gross*.00025 : 0 ;
@@ -44,18 +44,18 @@ export default class Order {
     // At this point, there's a question of NSE or BSE.
     const NSE = .0000325;
     const BSE = .00003;
-    return this.gross*NSE;
+    return Math.abs(this.gross*NSE);
   }
   get GST(){
-    return (this.brokerage+this.transactionFee)*.18;
+    return Math.abs((this.brokerage+this.transactionFee)*.18 );
   }
   get SEBI(){
-    return 0.000001*this.gross;
+    return Math.abs(0.000001*this.gross);
   }
   get stampCharge(){
     // This is stubbed in so it doesn't crash, but we need to figure this,
     //  likely based on the user's location or something?
-    return stampFees[this.stateChoice](this.gross) || 0;
+    return Math.abs(stampFees[this.stateChoice](this.gross) ) || 0;
   }
   get totalFees(){
     return this.brokerage + this.STT + this.transactionFee + this.GST + this.SEBI +  this.stampCharge;
