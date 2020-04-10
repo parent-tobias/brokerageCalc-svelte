@@ -190,6 +190,7 @@ const sortBy = (prop) => (a, b) =>{
     const {csvConverter, Activity} = brokerageCalc;
     
     let orders =  await csvConverter.fromFile(event.detail.file)
+    orders = orders.filter(order=>order.Instrument);
     activity = new Activity(orders);
   }
 
