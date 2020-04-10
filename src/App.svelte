@@ -27,14 +27,14 @@ const sortBy = (prop) => (a, b) =>{
     type: "allInstruments",
     columns: [
       { title: "Instrument", field: "instrument"},
-      { title: "# Traded", field: "traded"},
+      { title: "# Traded", field: "traded", func: (data) => Math.abs(data.traded)},
       { title: "Gross", field: "gross"},
       { title: "Total Fees", field: "totalFees"},
       { title: "Net", field: "net"},
     ],
     summaryRow: [
       { title: "** Totals **"},
-      { title: "traded", func: (data) => currency( data.reduce(sumBy("traded"), 0) ) },
+      { title: "traded", func: (data) => Math.abs( data.reduce(sumBy("traded"), 0) ) },
       { title: "gross", func: (data) => currency( data.reduce(sumBy("gross"), 0 ) ) },
       { title: "totalFees", func: (data) => currency( data.reduce(sumBy("totalFees"), 0 ) ) },
       { title: "net", func: (data) => currency( data.reduce(sumBy("net"), 0) ) },
@@ -44,7 +44,7 @@ const sortBy = (prop) => (a, b) =>{
     type: "allPositions",
     columns: [
       { title: "Instrument", field: "instrument"},
-      { title: "# Traded", field: "traded"},
+      { title: "# Traded", field: "traded", func: (data) => Math.abs(data.traded)},
       { title: "Gross", field: "gross"},
       { title: "Total Fees", field: "totalFees"},
       { title: "Net", field: "net"},
@@ -54,7 +54,7 @@ const sortBy = (prop) => (a, b) =>{
     ],
     summaryRow: [
       { title: "** Totals **"},
-      { title: "traded", func: (data) => currency( data.reduce(sumBy("traded"), 0) ) },
+      { title: "traded", func: (data) => Math.abs( data.reduce(sumBy("traded"), 0) ) },
       { title: "gross", func: (data) => currency( data.reduce(sumBy("gross"), 0 ) ) },
       { title: "totalFees", func: (data) => currency( data.reduce(sumBy("totalFees"), 0 ) ) },
       { title: "net", func: (data) => currency( data.reduce(sumBy("net"), 0) ) },
