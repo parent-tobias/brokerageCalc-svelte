@@ -206,7 +206,7 @@ const sortBy = (prop) => (a, b) =>{
   <header>
     <figure>
       <img alt="BrokerageCalc Logo" src="./img/logo.png" />
-      <figcaption>BrokerageCalc</figcaption>
+      <figcaption>A simple tool that helps you to know the various charges that you have incurred on Zerodha</figcaption>
     </figure>
   </header>
   <article>
@@ -251,12 +251,13 @@ const sortBy = (prop) => (a, b) =>{
     width: 90vw;
     margin: 0 auto;
   }
+ figure {
+    text-align: center;
+}
   header img {
-    width: 60vw;
+    width: 25vw;
   }
-	figcaption {
-    display: none;
-  }
+
   footer {
     font-size: .75em;
     text-align: center;
