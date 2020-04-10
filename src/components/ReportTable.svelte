@@ -56,7 +56,21 @@ table {
   width: 90vw;
   margin: 0 auto;
 }
+tr {
+  height: 43px;
+  text-align: center;
+}
 tbody > :nth-child(even){
-  background-color: rgb(150, 216, 210);
+  background-color: #0048a9;
+  color: white;
+  height: 40px;
+}
+
+tfoot tr {
+    height: 40px !important;
+    background-color: #ff8a00;
+    color: white;
+    font-weight: 600;
+    /* background-size: 27px; */
 }
 </style>
