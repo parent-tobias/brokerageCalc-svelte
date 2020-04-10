@@ -217,6 +217,7 @@ const sortBy = (prop) => (a, b) =>{
       <section class="content-pane">
         <h3>Overview Content</h3>
         <div>
+          <p><strong>Note:</strong> Currently, the tool supports only equity intraday transactions Download the order.csv file from Kite and upload it. Kite is Zerodha's user interface. Within that control panel, there is an option, <strong>Orders</strong>. Download that file, and upload it here - we can help you to view your fees and taxes, as your orders happen!</p>
           <FileUploader on:upload={handleFileUpload} />
             <StickySelector bind:selected={selectedState} settings={selectSettings} />
             <label>Include non-complete orders in transaction view: <input type="checkbox" bind:checked={includeCancelled} ></label>
