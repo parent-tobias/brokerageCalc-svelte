@@ -26,7 +26,7 @@ export default class CSV {
     linkEl.click();
   }
   async fromString(string){
-    const rows = string.split(/\n/);
+    const rows = string.split(/[\r\n]{1}/);
     const keys = rows.shift().split(",");
 
     const returnMe = await rows.map(row=>{
@@ -35,18 +35,18 @@ export default class CSV {
       keys.forEach((key, index)=>obj[key]=arr[index]);
       return obj;
     });
+    console.log(returnMe);
     return returnMe;
   }
   toString( fieldOrderArray, arrayOfObjects ){
     return fieldOrderArray.join(",")+"\n"+arrayOfObjects.map(
       object =>{
-        const row =fieldOrderArray.reduce(
+        return fieldOrderArray.reduce(
         (arr, prop)=>{
           arr = [...arr, object[prop]]
           return arr;
         },[]
-      ).join(",")
-      return row;
+      ).join(",");
     }).join("\n");
   }
 };
