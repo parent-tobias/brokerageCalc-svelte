@@ -26,7 +26,7 @@ export default class CSV {
     linkEl.click();
   }
   async fromString(string){
-    const rows = string.split(/[\r\n]{1}/);
+    const rows = string.split(/[\r\n]+/);
     const keys = rows.shift().split(",");
 
     const returnMe = await rows.map(row=>{
