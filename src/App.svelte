@@ -70,6 +70,7 @@ const sortBy = (prop) => (a, b) =>{
       { title: "Instrument", field: "instrument"},
       { title: "Time", field: "time", func: (trade)=>trade.time.split(" ")[1]},
       { title: "Type", field: "type"},
+      { title: "Product", field: "product"},
       { title: "Status", field: "status"},
       { title: "Avg Price", field: "averagePrice"},
       { title: "Quantity", field: "quantity", func: (trade) => trade.isSellOrder ? trade.quantity : `<span class='buy'>${trade.quantity}</span>`},
@@ -79,6 +80,7 @@ const sortBy = (prop) => (a, b) =>{
     ],
     summaryRow: [
       { title: "** Totals **"},
+      { title: ""},
       { title: ""},
       { title: ""},
       { title: ""},
@@ -215,7 +217,7 @@ const sortBy = (prop) => (a, b) =>{
     </section>
     {#if 1 === currentTab}
       <section class="content-pane">
-        <p><strong>Note:</strong> Currently, the tool supports only equity intraday transactions Download the order.csv file from <a href="https://kite.zerodha.com/orders" target="_blank">Kite</a> and upload it. Kite is Zerodha's user interface. Within that control panel, there is an option, <strong>Orders</strong>. Download that file, and upload it here - we can help you to view your fees and taxes, as your orders happen!</p>
+        <p><strong>Note:</strong> Currently, the tool supports only equity intraday MIS transactions (not CNC)</p> <p>Download the order.csv file from <a href="https://kite.zerodha.com/orders" target="_blank">Kite</a> and upload it. Kite is Zerodha's user interface. Within that control panel, there is an option, <strong>Orders</strong>. Download that file, and upload it here - we can help you to view your fees and taxes, as your orders happen!</p>
         <FileUploader on:upload={handleFileUpload} />
           <StickySelector bind:selected={selectedState} settings={selectSettings} />
           <label>Include non-complete orders in transaction view: <input type="checkbox" bind:checked={includeCancelled} ></label>

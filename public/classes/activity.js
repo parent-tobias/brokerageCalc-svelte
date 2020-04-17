@@ -28,7 +28,7 @@ export default class Activity {
     return this.state.orders;
   }
   get trades(){
-    return this.state.orders.filter(order => order.isComplete );
+    return this.state.orders.filter(order => order.isComplete && order.isMIS );
   }
   get instruments(){
     return this.state.instruments;

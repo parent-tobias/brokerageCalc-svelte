@@ -31,6 +31,9 @@ export default class Order {
   get instrument(){
     return this.state.instrument;
   }
+  get product(){
+    return this.state.product;
+  }
   get gross(){
     return Number(this.quantity)*Number(this.averagePrice)*-1;
   }
@@ -74,6 +77,9 @@ export default class Order {
   }
   get isSellOrder(){
     return this.state.type === "SELL";
+  }
+  get isMIS(){
+    return this.state.product === "MIS";
   }
   get time(){
     return this.state.time;

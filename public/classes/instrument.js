@@ -10,11 +10,11 @@ export default class Instrument {
   }) {
     // it's a good idea for us to sort the orders here, in case.
     const sortByTime = sortBy("time");
-    const isComplete = filterBy("status")("COMPLETE");
-
+    
     orders = orders.sort(sortByTime);
+    const trades = orders.filter(order => order.isComplete && order.isMIS );
 
-    const positions = orders.filter(isComplete).reduce((positionTemp, trade)=>{
+    const positions = trades.reduce((positionTemp, trade)=>{
       let last = positionTemp.length-1;
       if(positionTemp[last] && !positionTemp[last].isClosed){
         positionTemp[last].add(trade);
@@ -37,7 +37,7 @@ export default class Instrument {
     return this.state.orders;
   }
   get trades(){
-    return this.state.orders.filter(order => order.status==="COMPLETE");
+    return this.state.orders.filter(order => order.isComplete && order.isMIS);
   }
   get positions(){
     return this.state.positions;
