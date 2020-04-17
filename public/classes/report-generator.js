@@ -13,7 +13,7 @@ export default class ReportGenerator{
       net: currency( activity.positions.reduce(sumBy("net"), 0) )
     };
     const output = [...activity.trades, finalRow];
-    this.csvParser.toFile(["instrument","time","type","status","averagePrice","quantity","gross","totalFees","net"], output, "trades.csv");
+    this.csvParser.toFile(["instrument","time","type","product","status","averagePrice","quantity","gross","totalFees","net"], output, "trades.csv");
   }
   allPositions(activity){
     const finalRow = {
