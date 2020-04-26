@@ -243,8 +243,13 @@ const sortBy = (prop) => (a, b) =>{
     {/if}
   </article>
   <footer>
-    <span>Design and concepts: <a href="https://github.com/rajataudichya" target="_blank">Rajat Audichya</a></span> 
-    <div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3BFF46C4CEEBD21F42C31B5DEA49F4E1'><img src='./img/donate-now.png' alt="Support us with your kind donation!" /></a></div><span> Development and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a></span>
+    <div class="foot-about">
+      <span>Design and concepts: <a href="https://github.com/rajataudichya" target="_blank">Rajat Audichya</a></span> 
+      <div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3BFF46C4CEEBD21F42C31B5DEA49F4E1'><img src='./img/donate-now.png' alt="Support us with your kind donation!" /></a></div><span> Development and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a></span>
+    </div>
+    <div class="foot-disclaimer">While this site uses cookies to calculate the stamp duty, your data will never be transmitted off your machine without your express knowledge and consent.
+    </div>
+
   </footer>
 </main>
 

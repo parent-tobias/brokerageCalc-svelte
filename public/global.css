@@ -64,10 +64,14 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
-footer {
+footer .foot-about {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+footer .foot-disclaimer {
+  font-size: .9em;
+  font-style: italic;
 }
 footer .pm-button {
   background-size: contain no-repeat;
