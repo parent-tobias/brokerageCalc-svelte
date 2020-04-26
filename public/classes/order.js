@@ -1,9 +1,13 @@
+import FuturesFees from './futures-fees.js';
+import EquityFees from './equity-fees.js';
+
 import { currency } from '../utilities/number.js';
 import stampFees from '../custom-data/stamp-fees.js';
 export default class Order {
   constructor({
     "Time"        : time,
     "Type"        : type,
+    "Market"      : market,
     "Instrument"  : instrument,
     "Product"     : product,
     "Qty."        : qty=0,
@@ -14,6 +18,7 @@ export default class Order {
     this.state = {
       time,
       type, 
+      market,
       instrument, 
       product, 
       qty, 
@@ -41,13 +46,18 @@ export default class Order {
     return Math.abs(this.gross*.0003 > 20 ? 20 : this.gross*.0003);
   }
   get STT(){
-    return (this.isSellOrder&&this.isComplete) ? Math.abs(this.gross*.00025) : 0 ;
+    if(this.isFutures){
+      return FuturesFees.STT(this.isSellOrder, this.isComplete, this.gross);
+    } else {
+      return EquityFees.STT(this.isSellOrder, this.isComplete, this.gross);      
+    }
   }
   get transactionFee(){
-    // At this point, there's a question of NSE or BSE.
-    const NSE = .0000325;
-    const BSE = .00003;
-    return Math.abs(this.gross*NSE);
+    if(this.isFutures){
+      return FuturesFees.transactionFee(this.gross);
+    } else {
+      return EquityFees.transactionFee(this.gross);      
+    }
   }
   get GST(){
     return Math.abs((this.brokerage+this.transactionFee)*.18 );
@@ -71,6 +81,9 @@ export default class Order {
   }
   get type(){
     return this.state.type;
+  }
+  get isFutures(){
+    return this.state.market === "FUTURES";
   }
   get isComplete(){
     return this.status === "COMPLETE";

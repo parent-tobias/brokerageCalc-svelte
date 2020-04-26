@@ -7,6 +7,7 @@ const stateChoice = localStorage.getItem("stateChoice") || "Other";
 export default class Activity {
   constructor(orders){
     orders = orders.map(order=>{
+      order.Market = order.Instrument.endsWith("FUT") ? "FUTURES" : "EQUITY";
       return new Order(order, stateChoice);
     }).sort(sortBy("time"));
 
@@ -19,10 +20,15 @@ export default class Activity {
       })
     }).filter(instrument=>instrument.traded!==0);
 
+    const market = orders[0].isFutures ? "Futures" : "Equity"
     this.state = {
+      market,
       orders,
       instruments
     }
+  }
+  get market(){
+    return this.state.market;
   }
   get orders(){
     return this.state.orders;

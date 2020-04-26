@@ -222,9 +222,13 @@ const sortBy = (prop) => (a, b) =>{
           <StickySelector bind:selected={selectedState} settings={selectSettings} />
           <label>Include non-complete orders in transaction view: <input type="checkbox" bind:checked={includeCancelled} ></label>
         {#if activity}
+        <div class="upload-stats">
+          <h2>Trading Market: {activity.market}</h2>
           <span>Orders: {activity.orders.length} </span>
           <span>Trades: {activity.trades.length} </span>
           <span>Positions: {activity.positions.length} </span>
+        
+        </div>
         {/if}
       </section>
     {/if}
