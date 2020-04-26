@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="google-site-verification" content="DR9RV4Et4j6c5j4vgwcbe8EDQhD_N0CkIBAK8ahCMGQ">
+
+  <meta name="title" content="Intraday Brokerage and Charges Calculator">
+  <meta name="description"
+    content="A simple tool that helps you to know the various brokerage, stamp duty, STT, GST charges that you have incurred on Zerodha">
+  <meta name="keywords"
+    content="intraday charges calculator, Intraday calculator, charges calculator, Zerodha charges,  calculate zerodha charges,  zerodha brokerage calculator, charges calculator tool, stock market tools, stamp duty calculator ">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="5 days">
+
+  <title>BrokerageCalc</title>
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,700,900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/global.css">
+  <link rel="stylesheet" href="/build/bundle.css">
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <script type="module" src="./activity-loader.js"></script>
+  <script defer="" src="/build/bundle.js"></script>
+  <meta name="angularinspector" id="angularinspector_meta"
+    content="{&quot;apps&quot;:{&quot;http2&quot;:-1},&quot;host&quot;:&quot;intraday-brokeragecalc.netlify.app&quot;}">
+  <script type="text/javascript" src="chrome-extension://odkdoekijebogaiopbjgkgogkgifjfnk/detector.js"></script>
+</head>
+
+<body cz-shortcut-listen="true" style="" data-__gyazo-extension-added-paste-support="true">
+  <main id="app">
+    <main class="svelte-1pi2i0z">
+      <header class="svelte-1pi2i0z">
+        <figure class="svelte-1pi2i0z"><img alt="BrokerageCalc Logo" src="./img/logo.png" class="svelte-1pi2i0z">
+          <figcaption>A simple tool that helps you to know the various charges that you have incurred on Zerodha
+          </figcaption>
+        </figure>
+      </header>
+      <article>
+        <section>
+          <ul class="svelte-1l9r87p">
+            <li class="active svelte-1l9r87p"><span class="svelte-1l9r87p">Overview</span> </li>
+            <li class=" svelte-1l9r87p"><span class="svelte-1l9r87p">By Instrument</span> </li>
+            <li class=" svelte-1l9r87p"><span class="svelte-1l9r87p">By Position</span> </li>
+            <li class=" svelte-1l9r87p"><span class="svelte-1l9r87p">By Transaction</span> </li>
+          </ul>
+        </section>
+        <section class="content-pane">
+          <p><strong>Note:</strong> Currently, the tool supports only equity intraday MIS transactions (not CNC)</p>
+          <p>Download the order.csv file from <a href="https://kite.zerodha.com/orders" target="_blank">Kite</a> and
+            upload it. Kite is Zerodha's user interface. Within that control panel, there is an option,
+            <strong>Orders</strong>. Download that file, and upload it here - we can help you to view your fees and
+            taxes, as your orders happen!</p> <input type="file"> <select name="state-choice">
+            <option value="Choose your state...">Choose your state...</option>
+            <option value="Andra Pradesh">Andra Pradesh</option>
+            <option value="Arunach Pradesh">Arunach Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chattisgarh">Chattisgarh</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Orissa">Orissa</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telagana">Telagana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+          </select> <label>Include non-complete orders in transaction view: <input type="checkbox"></label>
+          <span>Orders: 58</span> <span>Trades: 35</span> <span>Positions: 17</span>
+        </section>
+      </article>
+      <footer class="svelte-1pi2i0z">
+        Design and concepts: <a href="https://github.com/rajataudichya" target="_blank">Rajat Audichya</a> | Development
+        and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a></footer>
+    </main>
+  </main>
+
+</body>
+
+</html>
