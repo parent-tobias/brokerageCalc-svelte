@@ -68,6 +68,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+	margin-top:10px;
 }
 footer .pm-button {
   background-size: contain no-repeat;
