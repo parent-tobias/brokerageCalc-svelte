@@ -1,4 +1,35 @@
 <!-- this is *just* the By Instruments tab pane, as the rest of the page is pretty static. I will pull each of the "By <whatever> into its own file, but I think the styling should be pretty universal for the table component. -->
+
+<style>
+  section{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+  }
+  table {
+    width: 90vw;
+    margin: 0 auto;
+  }
+  tr {
+    height: 43px;
+    text-align: center;
+  }
+  tbody > :nth-child(even){
+    background-color: #0048a9;
+    color: white;
+    height: 40px;
+  }
+  
+  tfoot tr {
+      height: 40px !important;
+      background-color: #ff8a00;
+      color: white;
+      font-weight: 600;
+      /* background-size: 27px; */
+  }
+  </style>
+
+
 <section class="svelte-1y0pana">
   <header>
     <h3>Activity by Instrument</h3> <button value="allInstruments">Download this as .csv</button>

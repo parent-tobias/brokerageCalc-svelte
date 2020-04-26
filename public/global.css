@@ -64,3 +64,11 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .pm-button {
+  display: inline-block;
+}
