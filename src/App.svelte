@@ -240,7 +240,7 @@ const sortBy = (prop) => (a, b) =>{
   </article>
   <footer>
     <span>Design and concepts: <a href="https://github.com/rajataudichya" target="_blank">Rajat Audichya</a></span> 
-    <div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3BFF46C4CEEBD21F42C31B5DEA49F4E1'><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/23.png' alt="Support us with your kind donation!" /></a></div><span> Development and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a></span>
+    <div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3BFF46C4CEEBD21F42C31B5DEA49F4E1'><img src='./img/donate-now.png' alt="Support us with your kind donation!" /></a></div><span> Development and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a></span>
   </footer>
 </main>
 

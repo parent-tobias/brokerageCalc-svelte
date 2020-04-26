@@ -70,5 +70,9 @@ footer {
   align-items: center;
 }
 footer .pm-button {
+  background-size: contain no-repeat;
   display: inline-block;
+}
+footer .pm-button img {
+  width: 8rem;
 }
