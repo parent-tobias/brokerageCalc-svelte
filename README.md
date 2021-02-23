@@ -4,4 +4,4 @@ This is a test project, built in [Svelte](https://svelte.dev). It has been desig
 
 ## See Spot Run
 
-[View the Demo](https://loving-bell-2aff3b.netlify.com/)
+[View the Demo](https://intraday-brokeragecalc.netlify.app/)
