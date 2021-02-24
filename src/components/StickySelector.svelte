@@ -14,7 +14,7 @@
   }
 </script>
 
-  <select bind:value={selected} on:change={changeHandler} name='state-choice'>
+  <select bind:value={selected} on:input={changeHandler} name='state-choice'>
     <option>{settings.placeHolder}</option>
     {#each settings.options as option}
     <option value={option.value}>{option.name}</option>

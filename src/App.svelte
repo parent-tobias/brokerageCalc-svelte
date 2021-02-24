@@ -1,8 +1,11 @@
 <script>
+
   import Tabs from './components/Tabs.svelte';
   import StickySelector from './components/StickySelector.svelte';
   import FileUploader from './components/FileUploader.svelte';
   import ReportTable from './components/ReportTable.svelte';
+  import Modal from './components/Modal.svelte';
+  import Content from './components/Content.svelte';
 
 
 const sumBy = prop => (total, obj) => Number(total) + Number(obj[prop]);
@@ -204,12 +207,56 @@ const sortBy = (prop) => (a, b) =>{
   }
 </script>
 
+<style>
+:global(*){
+font-family: "Muli", sans-serif;
+}
+main {
+width: 90vw;
+margin: 0 auto;
+}
+figure {
+text-align: center;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+header img {
+width: 25vw;
+}
+
+footer {
+font-size: .75em;
+text-align: center;
+}
+:global(.buy) {
+color: red;
+}
+:global(.buy::before) {
+content: "(";
+}
+:global(.buy::after) {
+content: ")";
+}
+
+@media (min-width: 640px) {
+main {
+  max-width: none;
+}
+}
+
+</style>
+
 <main>
   <header>
     <figure>
       <img alt="BrokerageCalc Logo" src="./img/logo.png" />
       <figcaption>A simple tool that helps you to know the various charges that you have incurred on Zerodha</figcaption>
     </figure>
+    <Modal>
+      <Content />
+    </Modal>
   </header>
   <article>
     <section>
@@ -243,39 +290,3 @@ const sortBy = (prop) => (a, b) =>{
     <div class='pm-button'><a href='https://www.payumoney.com/paybypayumoney/#/3BFF46C4CEEBD21F42C31B5DEA49F4E1'><img src='./img/donate-now.png' alt="Support us with your kind donation!" /></a></div><span> Development and implementation: <a href="https://github.com/parent-tobias" target="_blank">Tobias Parent</a></span>
   </footer>
 </main>
-
-<style>
-  :global(*){
-    font-family: "Muli", sans-serif;
-  }
-  main {
-    width: 90vw;
-    margin: 0 auto;
-  }
- figure {
-    text-align: center;
-}
-  header img {
-    width: 25vw;
-  }
-
-  footer {
-    font-size: .75em;
-    text-align: center;
-  }
-  :global(.buy) {
-    color: red;
-  }
-  :global(.buy::before) {
-    content: "(";
-  }
-  :global(.buy::after) {
-    content: ")";
-  }
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
