@@ -13,13 +13,14 @@
 	}
 </style>
 
-<h1>🎉 {message} 🍾</h1>
+<h1><img alt='logo' src='./favicon.png'> {message} <img alt='logo' src='./favicon.png'></h1>
 
 <h2>What is BrokerageCalc?</h2>
 <p>Zerodha is one of the larger brokerage houses in India, and for a lot of folks, it represents an easy way to get started in day-trading. But that has its ups and downs. One of the downs being fees: users will buy and sell, getting in and out of positions, and not be notified of their fees until a few days later. This can be problematic, as the transaction fees compound, and profits are quickly eaten away.</p>
 
 <h2>Why do we need it?</h2>
 <p>At any point during the trading day, however, it is possible to download a CSV file listing all transactions by the given user. With that information, we can take each transaction and calculate the fees. There are a number of fees, and at least one of them is a state-level tax, and the formula for that varies from state to state. So we came up with a tool that can read in that file, display the fees and totals as tabular data, and even return a CSV file containing the fees, allowing the user to collate that data with a spreadsheet at a later time.</p>
+<p>Here are a few sample files, feel free to download them and try it out: <a href='./orders/orders_1.csv' target='_blank'>Orders 1</a> | <a href='./orders/orders_2.csv' target='_blank'>Orders 2</a> | <a href='./orders/orders_3.csv' target='_blank'>Orders 3</a></p>
 
 <h2>Showcasing:</h2>
 <dl>

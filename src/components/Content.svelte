@@ -28,4 +28,19 @@
 	section {
 		padding-top: 0.5em;
 	}
+  button {
+    border: 3px solid #0048a9;
+    background-color: #d0dff2;
+    border-radius: 48%;
+    width: 4vmin;
+    height: 4vmin;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  button:hover {
+    background-color: #80afed;
+  }
 </style>
